@@ -60,5 +60,20 @@ The syntax to follow is the following:
     private.
 * Each method should be unit tested (see [unit test](#unit-test))
 
-## <a name="unit-test"></a>Unit test ##
-To limit bug 
+## Unit test ##
+To limit bug, ensure each method does its work without error and follow methods evolution, they are unit tested. These 
+tests check the result of a method against a predicted value for given parameters. If the test pass the method has the 
+required behaviour. If the test fail the method has an error in its behaviour and should be modified for all tests pass. 
+Unit tests are safety nets tracking methods behaviour and warning the developer if a method result change and limit bugs.
+```lua
+luaunit = require('luaunit');
+Test = class {};
+
+function Test:testMethod()
+  ...
+  luaunit.assert(actual, expected);
+end
+
+os.exit(luaunit.LuaUnit.run());
+```
+Be aware that in lua what we define as private method cannot be unit tested.
