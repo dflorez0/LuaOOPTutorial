@@ -60,7 +60,7 @@ The syntax to follow is the following:
     private.
 * Each method should be unit tested (see [unit test](#unit-test))
 
-## Unit test ##
+## <a name="unit-test"></a>Unit test ##
 To limit bug, ensure each method does its work without error and follow methods evolution, they are unit tested. These 
 tests check the result of a method against a predicted value for given parameters. If the test pass the method has the 
 required behaviour. If the test fail the method has an error in its behaviour and should be modified for all tests pass. 
