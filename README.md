@@ -58,9 +58,9 @@ The syntax to follow is the following:
 * One method do one thing. Has a rule of thumb, a method should be contained on the screen.
 * Public methods are methods that can be used by an external user (object), if the method should not be used if has to be 
     private.
-* Each method should be unit tested (see [unit test](#unit-test))
+* Each method should be unit tested (see **unit test**)
 
-## <a name="unit-test"></a>Unit test ##
+## Unit test ##
 To limit bug, ensure each method does its work without error and follow methods evolution, they are unit tested. These 
 tests check the result of a method against a predicted value for given parameters. If the test pass the method has the 
 required behaviour. If the test fail the method has an error in its behaviour and should be modified for all tests pass. 
