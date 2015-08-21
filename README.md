@@ -3,8 +3,8 @@ Lua Object Oriented Programming
 
 ## Objectives ##
 Object Oriented Programming simplify development, maintenance, readability and code re-usability. This small tutorial
-introduce object oriented programming in Lua and set a development standard which has to be followed by any people wanting
- to develop additional module, add new functionality or correct a bug.
+introduce object oriented programming in Lua and set a development standard which has to be followed by any people wanting 
+to develop additional module, add new functionality or correct a bug.
 
 ## Background ##
 The few following lines give some background to better understand object oriented programming and the tutorial. If you 
@@ -39,8 +39,8 @@ object _A_ change its property _p_, object _B_ has its _p_ property not changed.
 of a class are created by using a class property. An object property is specific to the created object.
 
 #### Methods ####
-In a same way methods can be defined by class or by object. Class defined methods are accessible without creating an instance
- of the class whereas object methods are available through object. As an example think of a dog object (in a programing 
+In a same way methods can be defined by class or by object. Class defined methods are accessible without creating an instance 
+of the class whereas object methods are available through object. As an example think of a dog object (in a programing 
 point of view), the method bark is defined as an object method because it is the dog object which bark. For a class method 
 example you can think of a Math class which provides some mathematical tool like a random number generation. There is no 
 sense to create a Math object only for getting a random number.
@@ -52,3 +52,13 @@ The syntax to follow is the following:
 * All names are explicit, a reader should understand what a property contains or what a method do only by reading its name
 * Camelcase is used for easier reading (eg. aMethodName(), aLongNameProperty, ThisIsAClassInCamelCaseSyntax)
 * Indentation has to be 2 spaces wide
+* A semicolon at the end of the line is optional but to avoid ambiguity it should be placed at the end of each line 
+    (when declaring local property it is required thus to avoid error it is better to put one at the end of each lines). 
+* One class by file, the file has the name of the class and the _.lua_ extension.
+* One method do one thing. Has a rule of thumb, a method should be contained on the screen.
+* Public methods are methods that can be used by an external user (object), if the method should not be used if has to be 
+    private.
+* Each method should be unit tested (see [unit test](#unit test))
+
+## <a name="unit test"></a>Unit test ##
+To limit bug 
