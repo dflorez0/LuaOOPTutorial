@@ -419,5 +419,5 @@ setmetatable(self, meta);
 ...
 ```
 Remember _Cat_ is a child of _Animal_ so it does not have access to private _Animal_ properties _name_, _age_, _size_ 
-thus we have to use the getters. Then by calling `print(cat)` it calls our new overridded metatable's method and display 
+thus we have to use the getters. Then by calling `print(cat);` it calls our new overridded metatable's method and display 
 `kitty, Felis, age: 1, size: 10`.
