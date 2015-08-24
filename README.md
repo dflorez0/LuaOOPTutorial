@@ -33,40 +33,40 @@ this rule, the public property area defined in the template should always be emp
 Properties and methods can be defined by class or by object (instance).
 
 #### Properties ####
-A class defined property or method is common to all **every** object. That means if object _A_ change a property _p_, 
-object _B_ access the new value, the old one is lost. However, object property is specific to **one** object thus if 
-object _A_ change its property _p_, object _B_ has its _p_ property not changed. For example we can count how many instance 
+A class defined property or method is common to **every** object. That means if object _A_ changes a property _p_, 
+object _B_ accesses the new value, the old one is lost. However, object property is specific to **one** object, thus if 
+object _A_ changes its property _p_, object _B_ has its _p_ property not changed. For example we can count how many instances 
 of a class are created by using a class property. An object property is specific to the created object.
 
 #### Methods ####
 In a same way methods can be defined by class or by object. Class defined methods are accessible without creating an instance 
-of the class whereas object methods are available through object. As an example think of a dog object (in a programing 
-point of view), the method bark is defined as an object method because it is the dog object which bark. For a class method 
-example you can think of a Math class which provides some mathematical tool like a random number generation. There is no 
-sense to create a Math object only for getting a random number.
+of the class whereas object methods are available through the object. As an example think of a dog object (in a programing 
+point of view), the method bark is defined as an object method because it is the dog object which barks and differnet dogs can 
+bark differently. For a class method example you can think of a Math class which provides some mathematical tool like a random 
+number generation. There is no sense to create a Math object only for getting a random number.
 
 ## Syntax ##
 The syntax to follow is the following:
-* Class name start with an uppercase
-* Method name are lowercase
-* All names are explicit, a reader should understand what a property contains or what a method do only by reading its name
-* Camelcase is used for easier reading (eg. aMethodName(), aLongNameProperty, ThisIsAClassInCamelCaseSyntax)
+* Class names start with an uppercase
+* Property and method names are lowercase
+* All names are explicit, a reader should understand what a property contains or what a method does only by reading its name
+* CamelCase is used for easier reading (eg. aMethodName(), aLongNameProperty, ThisIsAClassInCamelCaseSyntax)
 * Indentation has to be 2 spaces wide
 * A semicolon at the end of the line is optional but to avoid ambiguity it should be placed at the end of each line 
-    (when declaring local property it is required thus to avoid error it is better to put one at the end of each lines). 
+    (when declaring local property it is required thus to avoid errors it is better to put one at the end of each line). --TODO: verify
 * One class by file, the file has the name of the class and the _.lua_ extension.
-* One method do one thing. Has a rule of thumb, a method should be contained on the screen.
-* Public methods are methods that can be used by an external user (object), if the method should not be used if has to be 
+* One method does one thing. As a rule of thumb, the definition of a method should fit on the screen.
+* Public methods are methods that can be used by an external user (object). If the method should not be used by an external user (object) it has to be 
     private.
 * Each method should be unit tested (see **unit test**).
-* Each method has to be commented, excepted getters and setters.
+* Each method has to be commented, excepted getters and setters.	--TODO: unclear "and contain getters and setters"
 * Code duplicate is forbidden. If a code has to be duplicated it should be extracted and put in a method.
 
 ## Unit test ##
-To limit bug, ensure each method does its work without error and follow methods evolution, they are unit tested. These 
-tests check the result of a method against a predicted value for given parameters. If the test pass the method has the 
-required behaviour. If the test fail the method has an error in its behaviour and should be modified for all tests pass. 
-Unit tests are safety nets tracking methods behaviour and warning the developer if a method result change and limit bugs.
+To limit bugs, ensure each method does its work without error and follow methods evolution, they are unit tested. These 
+tests check the result of a method against a predicted value for given parameters. If the tests are passed, the method has the 
+required behaviour. If the tests fail, the method has an error in its behaviour and should be modified until all tests are passed. 
+Unit tests are safety nets tracking methods behaviour and warning the developer if a method result change and limit bugs. 	--TODO: unclear
 ```lua
 luaunit = require('luaunit');
 Test = class {};
@@ -100,13 +100,13 @@ package.path = package.path..';./src/?.lua;./lib/?.lua'
 require 'OOP'
 ```
 
-`package.path` line register src and lib folder to path to quickly load package
-`require 'OOP'` include the OOP.lua file for simplified object oriented programming
-You can see the file has a header with the file name, its author and its creation date.
+The `package.path` line registers src and lib folders to the path to quickly load packages.
+`require 'OOP'` includes the OOP.lua file for simplified object oriented programming
+You can see the file has a header with the file name, its author and its creation date. --TODO: maybe even mention the common definition of a header in the syntax section.
 
 #### Animal.lua ####
 
-In _src_ folder we add an _Animal.lua_ file defining an Animal class.
+In the _src_ folder we add an _Animal.lua_ file defining an Animal class.
 ```lua
 -- Animal.lua
 -- Author: joel
@@ -146,6 +146,8 @@ end
 
 Public properties section have been removed because they should not exist.
 
+--TODO: how to translate the following to ET/Osmose?
+
 An animal has a name, an age, and a size. These properties are specific to each animal thus, they are instance properties.
 ```lua
 --- Private Instance Properties
@@ -156,7 +158,7 @@ local _age;
 local _size;
 ```
 
-We add getters and setters. And we add limit to age and size and check they are valid numbers.
+We add getters and setters. And we add a limit to age and size and check that they are valid numbers.
 ```lua
 ...
 function self.setAge(age)
@@ -198,7 +200,7 @@ end
 ...
 ```
 
-If we try to create an animal with an age value of -3 the method rise an error: `lua: ./src/Animal.lua:38: -3 is negative` and a stacktrace 
+If we try to create an animal with an age value of -3 the method rises an error: `lua: ./src/Animal.lua:38: -3 is negative` and a stacktrace 
 to locate the error.
 
 We add a print function to display the animal characteristic.
@@ -210,7 +212,7 @@ end
 ...
 ```
 
-Let say an animal can talk (in a way they are). We add a talk method to the Animal class. This method is public thus can 
+Lets say an animal can talk (in a way they are). We add a talk method to the Animal class. This method is public thus can 
 be accessed by an external class.
 ```lua
 ...
@@ -229,7 +231,7 @@ function Dog.new(name, age, size)
 ...
 ```
 
-Because it inherits from animal all methods defined in Animal are also defined in Dog. Name, age and size are compulsory 
+Because it inherits from animal, all methods defined in Animal are also defined in Dog. Name, age and size are compulsory 
 for a dog creation thus they are parameters in the constructor. We then call setters in the constructor methods call to 
 set the corresponding value.
 ```lua
@@ -244,8 +246,8 @@ self.setSize(size);
 return self
 ```
 
-A dog bark so we override the talk method. That means we write a method talk to dog which will be called instead of the 
-mother class' talk method.
+A dog barks so we override the talk method. That means we write a method "talk" specific to "dog" which will be called instead of the 
+mother class' "talk" method.
 ```lua
 function self.talk()
   print(self.getName().." is barking");
@@ -267,7 +269,7 @@ dog.talk();
 
 ### Advanced ###
 We are going to add a Cat class inheriting from Animal in a same manner. But before we are going to modify the Animal 
-class to avoid calling setName, setAge and setSize in both Dog and Cat classes.
+class to avoid calling setName, setAge and setSize in both Dog and Cat classes.		--TODO unclear to me:(
 ```lua
 ...
 function Animal.new(name, age, size)
@@ -281,7 +283,7 @@ function Animal.new(name, age, size)
 ...
 ```
 
-It is possible to set the name, age and size value directly without using setters but by doing this we lose the check. 
+It is possible to set the name, age and size value directly without using setters but by doing this we loose the check. 
 
 In dog when inheriting from Animal we pass the name, age and size arguments in the class call and we remove the setter call.
 ```lua
@@ -307,13 +309,13 @@ cat.print();
 cat.talk();
 ```
 
-You can see when we call `cat.talk()` lua prints `kitty is talking`. That is because we have not overridden the talk 
+You can see when we call `cat.talk()` lua prints `kitty is talking`. That is because we have not overwritten the talk 
 method for _Cat_ so it is the _Animal talk_ method which is called.
 
 ### Multiple Inheritance ###
-This design support multiple inheritance through the _OOP.lua_ library. We are going to create a _Felis_ class and _Cat_ 
-will inherit from _Animal_ but also from _Felis_. That is not correct in a programming point of view but for the exercise 
-it is convenient. It has a simple method which return true.
+This design supports multiple inheritance through the _OOP.lua_ library. We are going to create a _Felis_ class and _Cat_ 
+will inherit from _Animal_ but also from _Felis_. That is not correct from a programming point of view but for the exercise 		--TODO: Why not correct?
+it is convenient. It has a simple method which returns true.
 ```lua
 -- Felis.lua
 -- Author: joel
@@ -357,7 +359,7 @@ function Felis.new()
 end
 ```
 
-The class _Cat_ require the _Felis.lua_ file and inherits from _Animal_ and also _Felis_.
+The class _Cat_ requires the _Felis.lua_ file and inherits from _Animal_ and also _Felis_.
 ```lua
 ...
 require 'Felis'
@@ -367,7 +369,7 @@ local self = class {Animal.new(name, age, size), Felis.new()}
 ```
 
 Then in main we can call `print(cat.isFelis())` and it prints `true`. However if we try `print(dog.isFelis())` it returns 
-an error because the method does not exists.
+an error because the method does not exist.
 ```
 lua: main.lua:18: attempt to call field 'isFelis' (a nil value)
 stack traceback:
@@ -377,8 +379,8 @@ stack traceback:
 
 ### Operator Overloading ###
 Operator overloading is a little like property overloading, we redefine how an operator (+, -, * etc) has to behave. For 
-this we use metatable. It allows for example to add two object using the + operator or to print directly an object without 
-a print method like we have in _Animal_. First we add a table meta in animal.
+this we use a metatable. It allows for example to add two objects using the + operator or to print directly an object without 
+a print method like we have in _Animal_. First we add a metatable to animal.
 ```lua
 ...
 local meta = {};
@@ -397,9 +399,9 @@ Then we can remove the print function of _Animal_ and in _main_ instead of `dog.
 does not change a lot in this example but it is very powerful.
 
 #### With Inheritance ####
-_OOP.lua_ manage metatable inheritance and children inherit from metatable as well as other properties. *BE CAREFUL* in 
-case of multiple inheritance metatable functions present in both motherclass, like in the _Cat_ class inheriting from 
-_Animal_ and _Felis_, the function from the last motherclass overrides all the previous class. For example we can add a 
+_OOP.lua_ manages metatable inheritance and children inherit the metatable as well as other properties. *BE CAREFUL*: In 
+case of multiple inheritance, metatable functions present in both motherclasses, like in the _Cat_ class inheriting from 
+_Animal_ and _Felis_, the function from the last motherclass overrides all the previous classes. For example we can add a 
 _tostring_ override in _Felis_.
 ```lua
 ...
@@ -409,8 +411,8 @@ meta.__tostring =
   end
 ...
 ```
-Because _Cat_ inherits from _Animal_ and _Felis_ its metatable is composed of both. Both parent metatable define the same 
-function _tostring_ the last one, here _Felis_, is the one keeped. Thus when we call `print(dog);` it returns 
+Because _Cat_ inherits from _Animal_ and _Felis_ its metatable is composed of both. Both parent metatables define the same 
+function _tostring_, however, the last one (here _Felis_) is the one keeped. Thus when we call `print(dog);` it returns 
 `doggy, age:3, size: 50`, inherited from _Animal_, but when we call `print(cat);` it returns `Felis`, inherited 
 from _Felis_. If we want a custom _tostring_ for _Cat_ we can override (again) the method.
 ```lua
@@ -425,5 +427,5 @@ setmetatable(self, meta);
 ...
 ```
 Remember _Cat_ is a child of _Animal_ so it does not have access to private _Animal_ properties _name_, _age_, _size_ 
-thus we have to use the getters. Then by calling `print(cat);` it calls our new overridded metatable's method and display 
+thus we have to use the getters. Then by calling `print(cat);` it calls our new overwritten metatable's method and displays 
 `kitty, Felis, age: 1, size: 10`.
