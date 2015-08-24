@@ -80,6 +80,12 @@ os.exit(luaunit.LuaUnit.run());
 ```
 Be aware that in lua what we define as private method cannot be unit tested.
 
+## Template ##
+A class template _Template.lua_ is available in the main folder.
+
+## Documentation ##
+To create the documentation we use LDoc with the command `ldoc --all src'. Its output is written to the doc folder.
+
 ## Tutorial ##
 ### Basic ###
 We are going to write a small application with Animals. First the application launcher. We create a _main.lua_ file 
