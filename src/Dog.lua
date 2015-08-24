@@ -24,9 +24,6 @@ function Dog.new(name, age, size)
   --- Private Instance Properties
   -- @section
 
-  --- Public Instance Properties
-  -- @section
-
   --- Private Instance Methods
   -- @section
 

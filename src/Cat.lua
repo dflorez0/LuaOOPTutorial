@@ -31,6 +31,12 @@ function Cat.new(name, age, size)
   -- @section
 
   -- Constructor Methods Call --
+  local meta = getmetatable(self);
+  meta.__tostring =
+  function ()
+    return self.getName()..', Felis, age: '..self.getAge()..', size: '..self.getSize();
+  end
 
+  setmetatable(self,meta);
   return self
 end

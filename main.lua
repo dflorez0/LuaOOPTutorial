@@ -9,9 +9,9 @@ require 'Dog'
 require 'Cat'
 
 dog = Dog.new('doggy', 3, 50);
-dog.print();
+print(dog);
 dog.talk();
 cat = Cat.new('kitty', 1, 10);
-cat.print();
+print(cat);
 cat.talk();
 print(cat.isFelis());

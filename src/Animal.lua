@@ -10,6 +10,8 @@ Animal = {}
 --- Private Class Properties
 --  @section
 
+local meta = {};
+
 --- Private Class Methods
 --  @section
 
@@ -83,17 +85,17 @@ function Animal.new(name, age, size)
     print(_name.." is talking");
   end
 
-  --- Print the data
-  --
-  function self.print()
-    print(_name..', age: '.._age..', size: '.._size);
-  end
-
   -- Constructor Methods Call --
 
   self.setName(name);
   self.setAge(age);
   self.setSize(size);
 
+  meta.__tostring =
+  function ()
+    return _name..', age: '.._age..', size: '.._size;
+  end
+
+  setmetatable(self, meta);
   return self
 end

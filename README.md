@@ -368,3 +368,56 @@ stack traceback:
         main.lua:18: in main chunk
         [C]: in ?
 ```
+
+### Operator Overloading ###
+Operator overloading is a little like property overloading, we redefine how an operator (+, -, * etc) has to behave. For 
+this we use metatable. It allows for example to add two object using the + operator or to print directly an object without 
+a print method like we have in _Animal_. First we add a table meta in animal.
+```lua
+...
+local meta = {};
+...
+```
+Before returning the instance of an animal we set the functions of the metatable of the instance and we set its metatable.
+```lua
+...
+meta.__tostring = function ()
+ return _name..', age: '.._age..', size: '.._size;
+end
+setmetatable(self, meta);
+...
+```
+Then we can remove the print function of _Animal_ and in _main_ instead of `dog.print();` we can call `print(dog);`. It 
+does not change a lot in this example but it is very powerful.
+
+#### With Inheritance ####
+_OOP.lua_ manage metatable inheritance and children inherit from metatable as well as other properties. *BE CAREFUL* in 
+case of multiple inheritance metatable functions present in both motherclass, like in the _Cat_ class inheriting from 
+_Animal_ and _Felis_, the function from the last motherclass overrides all the previous class. For example we can add a 
+_tostring_ override in _Felis_.
+```lua
+...
+meta.__tostring =
+  function ()
+    return 'Felis';
+  end
+...
+```
+Because _Cat_ inherits from _Animal_ and _Felis_ its metatable is composed of both. Both parent metatable define the same 
+function _tostring_ the last one, here _Felis_, is the one keeped. Thus when we call `print(dog);` it returns 
+`doggy, age:3, size: 50`, inherited from _Animal_, but when we call `print(cat);` it returns `Felis`, inherited 
+from _Felis_. If we want a custom _tostring_ for _Cat_ we can override (again) the method.
+```lua
+...
+local meta = getmetatable(self);
+meta.__tostring =
+  function ()
+    return self.getName()..', Felis, age: '..self.getAge()..', size: '..self.getSize();
+  end
+
+setmetatable(self, meta);
+...
+```
+Remember _Cat_ is a child of _Animal_ so it does not have access to private _Animal_ properties _name_, _age_, _size_ 
+thus we have to use the getters. Then by calling `print(cat)` it calls our new overridded metatable's method and display 
+`kitty, Felis, age: 1, size: 10`.

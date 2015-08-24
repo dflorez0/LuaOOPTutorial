@@ -10,6 +10,8 @@ Felis = {}
 --- Private Class Properties
 -- @section
 
+local meta = {}
+
 --- Private Class Methods
 -- @section
 
@@ -36,5 +38,11 @@ function Felis.new()
 
   -- Constructor Methods Call --
 
+  meta.__tostring =
+  function ()
+    return 'Felis';
+  end
+
+  setmetatable(self, meta);
   return self
 end
