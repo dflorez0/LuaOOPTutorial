@@ -53,20 +53,20 @@ The syntax to follow is the following:
 * CamelCase is used for easier reading (eg. aMethodName(), aLongNameProperty, ThisIsAClassInCamelCaseSyntax)
 * Indentation has to be 2 spaces wide
 * A semicolon at the end of the line is optional but to avoid ambiguity it should be placed at the end of each line 
-    (when declaring local property it is required thus to avoid errors it is better to put one at the end of each line). --TODO: verify
+    (when declaring local property it is required thus to avoid errors it is better to put one at the end of each line).
 * One class by file, the file has the name of the class and the _.lua_ extension.
 * One method does one thing. As a rule of thumb, the definition of a method should fit on the screen.
 * Public methods are methods that can be used by an external user (object). If the method should not be used by an external user (object) it has to be 
     private.
 * Each method should be unit tested (see **unit test**).
-* Each method has to be commented, excepted getters and setters.	--TODO: unclear "and contain getters and setters"
+* Each method has to be commented, except getters and setters.
 * Code duplicate is forbidden. If a code has to be duplicated it should be extracted and put in a method.
 
 ## Unit test ##
-To limit bugs, ensure each method does its work without error and follow methods evolution, they are unit tested. These 
+To limit bugs, ensure each method does its work without error and follow methods evolution, they are unit tested (Attention: This has nothing to do with the term "Unit" in Osmose). These 
 tests check the result of a method against a predicted value for given parameters. If the tests are passed, the method has the 
 required behaviour. If the tests fail, the method has an error in its behaviour and should be modified until all tests are passed. 
-Unit tests are safety nets tracking methods behaviour and warning the developer if a method result change and limit bugs. 	--TODO: unclear
+Unit tests are safety nets tracking methods behaviour, and warn the developer if a method's result changes thus limiting bugs.
 ```lua
 luaunit = require('luaunit');
 Test = class {};
@@ -269,7 +269,7 @@ dog.talk();
 
 ### Advanced ###
 We are going to add a Cat class inheriting from Animal in a same manner. But before we are going to modify the Animal 
-class to avoid calling setName, setAge and setSize in both Dog and Cat classes.		--TODO unclear to me:(
+class to avoid calling setName, setAge and setSize in both Dog and Cat classes.
 ```lua
 ...
 function Animal.new(name, age, size)
@@ -314,7 +314,7 @@ method for _Cat_ so it is the _Animal talk_ method which is called.
 
 ### Multiple Inheritance ###
 This design supports multiple inheritance through the _OOP.lua_ library. We are going to create a _Felis_ class and _Cat_ 
-will inherit from _Animal_ but also from _Felis_. That is not correct from a programming point of view but for the exercise 		--TODO: Why not correct?
+will inherit from _Animal_ but also from _Felis_. That is not correct from a programming point of view but for the exercise
 it is convenient. It has a simple method which returns true.
 ```lua
 -- Felis.lua
