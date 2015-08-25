@@ -62,6 +62,22 @@ The syntax to follow is the following:
 * Each method has to be commented, except getters and setters.
 * Code duplicate is forbidden. If a code has to be duplicated it should be extracted and put in a method.
 
+## Class Structure ##
+As shown by the template _Template.lua_ the class structure to follow is the following:
+* The header of the file containing the file name, the author and the creation date
+* All requirement
+* The class table
+* The private class properties
+* The private class methods
+* The public class methods
+* The constructor
+* The instance creation (called self) with the inheritance command
+* The private instance properties
+* The private instance methods
+* The public instance methods
+* The call to methods for building an instance. These methods' call are used for setting the instance default values
+* The operator overloading
+
 ## Unit test ##
 To limit bugs, ensure each method does its work without error and follow methods evolution, they are unit tested (Attention: This has nothing to do with the term "Unit" in Osmose). These 
 tests check the result of a method against a predicted value for given parameters. If the tests are passed, the method has the 
@@ -79,12 +95,17 @@ end
 os.exit(luaunit.LuaUnit.run());
 ```
 Be aware that in lua what we define as private method cannot be unit tested.
+For more information about luaunit have a look at http://luaunit.readthedocs.org/en/latest/
 
 ## Template ##
 A class template _Template.lua_ is available in the main folder.
 
 ## Documentation ##
 To create the documentation we use LDoc with the command `ldoc --all src'. Its output is written to the doc folder.
+
+## IDE ##
+I personally use IntelliJ IDEA community edition with the lua plugin for development. Have a look here 
+https://bitbucket.org/sylvanaar2/lua-for-idea/wiki/Home for more information.
 
 ## Tutorial ##
 ### Basic ###
@@ -102,7 +123,7 @@ require 'OOP'
 
 The `package.path` line registers src and lib folders to the path to quickly load packages.
 `require 'OOP'` includes the OOP.lua file for simplified object oriented programming
-You can see the file has a header with the file name, its author and its creation date. --TODO: maybe even mention the common definition of a header in the syntax section.
+You can see the file has a header with the file name, its author and its creation date.
 
 #### Animal.lua ####
 
@@ -145,8 +166,6 @@ end
 ```
 
 Public properties section have been removed because they should not exist.
-
---TODO: how to translate the following to ET/Osmose?
 
 An animal has a name, an age, and a size. These properties are specific to each animal thus, they are instance properties.
 ```lua
@@ -429,3 +448,29 @@ setmetatable(self, meta);
 Remember _Cat_ is a child of _Animal_ so it does not have access to private _Animal_ properties _name_, _age_, _size_ 
 thus we have to use the getters. Then by calling `print(cat);` it calls our new overwritten metatable's method and displays 
 `kitty, Felis, age: 1, size: 10`.
+
+### Unit test ###
+In the _test_ folder we create a _TestAnimal.lua_ file. We set the `package.path` to include the _src_ and _lib_ folders.
+We require _luaunit_, _OOP_ and the class we want to test, _Animal_. We create the _TestAnimal_ table and an animal instance.
+We crate a _setUp()_ method to create the animal instance on which we are going to work. Then we test the method setSize 
+with all possible case, with negative, nil, text and positive size value. Each test runs the method and check its behaviour.
+```lua
+...
+local animal;
+
+--- Prepare the animal instance
+--
+function TestAnimal:setUp()
+  animal = Animal.new("name", 0, 0);
+end
+
+--- Test the Animal.setSize with a negative value
+--
+function TestAnimal:testNegativeSize()
+  luaunit.assertErrorMsgContains('-1 is negative', animal.setSize, -1);
+end
+...
+```
+Then we run the script with `lua TestAnimal.lua -o TAP`. The option `... -o TAP` serves to give details on the tests.
+To simplify the running of the tests we can create a _testMain.lua_ script file and add a require line for each test class 
+we want to run.
